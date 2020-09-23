@@ -79,6 +79,13 @@ public class Player : MonoBehaviour
         energy = 0;
 
         UpdateStats();
+
+        for (int i = 0; i < GameMng.GetRules().startCardsOnHand; i++)
+        {
+            DrawCard(deck);
+            // So we don't exceed the draw limit
+            drawCount = 0;
+        }
     }
 
     public void StartTurn()
@@ -100,6 +107,19 @@ public class Player : MonoBehaviour
 
     public void FinishTurn()
     {
+        if (!GameMng.GetRules().attackOnTap)
+        {
+            var cards = playArea.GetCards();
+
+            foreach (var card in cards)
+            {
+                if ((card.desc.type == CardDesc.Type.Creature) && (card.tapped))
+                {
+                    RunAttack(card);
+                }
+            }
+        }
+
         activePlayer = false;
 
         graphicRaycaster.enabled = false;
@@ -220,5 +240,50 @@ public class Player : MonoBehaviour
     public void NextTurn()
     {
         GameMng.NextTurn();
+    }
+
+    public void RunAttack(Card card)
+    {
+        int     attackPower = card.GetAttackPower();
+        Player  otherPlayer = GameMng.GetOtherPlayer(this);
+
+        otherPlayer.DealDamage(this, attackPower);
+    }
+
+    public void DealDamage(Player player, int totalDamage)
+    {
+        int damage = totalDamage;
+
+        var inPlay = playArea.GetCards();
+
+        foreach (var card in inPlay)
+        {
+            if ((card.desc.type == CardDesc.Type.Creature) &&
+                (!card.tapped))
+            {
+                // This creature can defend (damage can overflow)
+                damage = card.DealDamage(damage);
+                if (damage <= 0) break;
+            }
+        }
+
+        playArea.ClearCreatures();
+
+        if (damage > 0)
+        {
+            // Deal damage to the player itself
+            hp -= damage;
+            if (hp < 0)
+            {
+                // Player dead!
+                Debug.Log(playerName + " is dead!");
+            }
+            UpdateStats();
+        }
+    }
+
+    public void SendToGraveyard(CardDesc card)
+    {
+        graveyard.Add(card);
     }
 }

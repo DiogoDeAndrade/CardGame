@@ -9,7 +9,9 @@ public class GameRules : ScriptableObject
     public bool infiniteDeck = true;
     [ShowIf("infiniteDeck")]
     public bool reshuffleInfinite = true;
+    public int  startCardsOnHand = 4;
     public int  maxCardsInHand = 6;
     public int  drawPerTurn = 1;
     public bool energyOnDrop = false;
+    public bool attackOnTap = false;
 }

@@ -50,6 +50,16 @@ public class GameMng : MonoBehaviour
         StartTurn(playerIndex);
     }
 
+    Player _GetOtherPlayer(Player player)
+    {
+        foreach (var p in players)
+        {
+            if (p != player) return p;
+        }
+
+        return null;
+    }
+
     static public GameRules GetRules()
     {
         return instance.rules;
@@ -69,5 +79,10 @@ public class GameMng : MonoBehaviour
     static public void NextTurn()
     {
         instance._NextTurn();
+    }
+
+    static public Player GetOtherPlayer(Player player)
+    {
+        return instance._GetOtherPlayer(player);
     }
 }

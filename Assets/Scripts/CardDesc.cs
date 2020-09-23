@@ -15,6 +15,11 @@ public class CardDesc : ScriptableObject
     [ShowIf("IsEnergy")]
     public int      energyAmmount = 0;
 
+    [ShowIf("IsCreature")]
+    public int      attackPower = 0;
+    [ShowIf("IsCreature")]
+    public int      defensePower = 0;
+
     [TextArea]
     public string   flavourText;
     [ShowAssetPreview(128, 128)]
@@ -23,6 +28,11 @@ public class CardDesc : ScriptableObject
     bool IsEnergy()
     {
         return type == Type.Energy;
+    }
+
+    bool IsCreature()
+    {
+        return type == Type.Creature;
     }
 
     public void OnPlay(Player player)

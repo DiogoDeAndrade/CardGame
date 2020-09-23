@@ -30,6 +30,14 @@ public class CardPile : MonoBehaviour
         UpdateCount();
     }
 
+    public void Add(CardDesc cardToAdd)
+    {
+        if (cards == null) cards = new List<CardDesc>();
+
+        cards.Add(cardToAdd);
+        UpdateCount();
+    }
+
     public void Clear()
     {
         cards = new List<CardDesc>();

@@ -183,9 +183,13 @@ public class Player : MonoBehaviour
     {
         if (currentCard == null) return;
 
-        playArea.Add(currentCard);
-        hand.Remove(currentCard);
-        currentCard = null;
+        // Check if we can drop this card (if we can pay the cost or other weirder criteria)
+        if (currentCard.desc.CanPlay(this))
+        {
+            playArea.Add(currentCard);
+            hand.Remove(currentCard);
+            currentCard = null;
+        }
     }
 
     void ShuffleDeck(List<CardDesc> cards)

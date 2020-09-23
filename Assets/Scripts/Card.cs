@@ -19,6 +19,7 @@ public class Card : MonoBehaviour
     public TextMeshProUGUI  nameDisplay;
     public Image            image;
     public TextMeshProUGUI  flavourDisplay;
+    public TextMeshProUGUI  costDisplay;
 
     void Start()
     {
@@ -40,6 +41,16 @@ public class Card : MonoBehaviour
             image.sprite = desc.image;
             image.enabled = (image.sprite != null);            
             flavourDisplay.text = desc.flavourText;
+
+            if (desc.cost > 0)
+            {
+                costDisplay.text = "" + desc.cost;
+                costDisplay.transform.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                costDisplay.transform.parent.gameObject.SetActive(false);
+            }
         }
     }
 

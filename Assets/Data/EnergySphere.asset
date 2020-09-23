@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   cardName: Energy Sphere
-  flavourText: A simple energy sphere
+  cost: 0
+  energyAmmount: 3
+  flavourText: 'A simple energy sphere
+
+
+    +3 energy'
   image: {fileID: 21300000, guid: 1e95acf4928a58745a5b15e5fd5ec837, type: 3}

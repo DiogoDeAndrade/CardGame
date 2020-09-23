@@ -10,6 +10,7 @@ public class CardDesc : ScriptableObject
 
     public Type     type;
     public string   cardName = "No name";
+    public int      cost = 0;
 
     [ShowIf("IsEnergy")]
     public int      energyAmmount = 0;
@@ -30,6 +31,9 @@ public class CardDesc : ScriptableObject
         {
             player.ChangeEnergy(energyAmmount);
         }
+
+        // Pay the cost
+        player.ChangeEnergy(-cost);
     }
 
     public void OnUpkeep(Player player)
@@ -38,5 +42,15 @@ public class CardDesc : ScriptableObject
         {
             player.ChangeEnergy(energyAmmount);
         }
+    }
+
+    public bool CanPlay(Player player)
+    {
+        if (player.energy >= cost)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

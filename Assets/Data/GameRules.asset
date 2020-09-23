@@ -16,3 +16,4 @@ MonoBehaviour:
   reshuffleInfinite: 1
   maxCardsInHand: 6
   drawPerTurn: 1
+  energyOnDrop: 1

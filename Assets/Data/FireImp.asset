@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   cardName: Fire Imp
+  cost: 6
+  energyAmmount: 0
   flavourText: From the blackest hell...
   image: {fileID: 21300000, guid: 9ca6d232ff326c84584e0e22c14badff, type: 3}

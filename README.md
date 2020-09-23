@@ -48,4 +48,5 @@ All code in this repo is made available through [GPLv3].
 [CC4]:https://creativecommons.org/licenses/by/4.0/
 [MIT]:https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE
 [Wikipedia]: https://www.wikipedia.org
+[NaughtyAttributes]: https://github.com/dbrizov/NaughtyAttributes
 [Diogo Andrade]:https://github.com/DiogoDeAndrade

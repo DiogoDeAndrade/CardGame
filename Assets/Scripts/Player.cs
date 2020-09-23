@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,12 +12,13 @@ public class Player : MonoBehaviour
     public CardPile deck;
     public CardPile graveyard;
 
-    CanvasGroup canvasGroup;
+    GraphicRaycaster graphicRaycaster;
+    int              drawCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        graphicRaycaster = GetComponent<GraphicRaycaster>();
     }
 
     // Update is called once per frame
@@ -37,12 +39,13 @@ public class Player : MonoBehaviour
 
     public void StartTurn()
     {
-        canvasGroup.interactable = true;
+        graphicRaycaster.enabled = true;
+        drawCount = 0;
     }
 
     public void FinishTurn()
     {
-        canvasGroup.interactable = false;
+        graphicRaycaster.enabled = false;
     }
 
     public void DrawCard(CardPile pile)
@@ -73,6 +76,11 @@ public class Player : MonoBehaviour
 
         // Check if we can draw cards (cards in hand is less than maximum allowed)
         if (hand.GetCardCount() >= GameMng.GetRules().maxCardsInHand) return;
+
+        // Check if we've already drawn enough cards this turn
+        if (drawCount >= GameMng.GetRules().drawPerTurn) return;
+
+        drawCount++;
 
         // Get the first card
         CardDesc card = pile.GetFirstCard();

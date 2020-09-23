@@ -10,4 +10,5 @@ public class GameRules : ScriptableObject
     [ShowIf("infiniteDeck")]
     public bool reshuffleInfinite = true;
     public int  maxCardsInHand = 6;
+    public int  drawPerTurn = 1;
 }

@@ -6,6 +6,7 @@ using TMPro;
 
 public class CardPile : MonoBehaviour
 {
+    [Header("References")]
     public TextMeshProUGUI countText;
     public Image           cardDisplay;
 
@@ -29,16 +30,39 @@ public class CardPile : MonoBehaviour
         UpdateCount();
     }
 
+    public void Clear()
+    {
+        cards = new List<CardDesc>();
+        UpdateCount();
+    }
+
     void UpdateCount()
     {
-        int count = 0;
-
-        if (cards != null)
-        {
-            count = cards.Count;
-        }
+        int count = GetCardCount();
 
         countText.text = "Cards: " + count;
-        cardDisplay.enabled = count > 0;
+        cardDisplay.gameObject.SetActive(count > 0);
+    }
+
+    public int GetCardCount()
+    {
+        if (cards == null) return 0;
+
+        return cards.Count;
+    }
+
+    public CardDesc GetFirstCard()
+    {
+        var card = cards[0];
+
+        cards.RemoveAt(0);
+        UpdateCount();
+
+        return card;
+    }
+
+    public List<CardDesc> GetCards()
+    {
+        return cards;
     }
 }

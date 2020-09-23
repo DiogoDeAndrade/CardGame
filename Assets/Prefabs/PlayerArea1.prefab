@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &922214599040290786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729591819167771233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8391170213570683933}
+          m_MethodName: DrawCard
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4275455237356607577}
+            m_ObjectArgumentAssemblyTypeName: CardPile, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8001399770501720757
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +40,7 @@ GameObject:
   - component: {fileID: 8001399770501720753}
   - component: {fileID: 8001399770501720754}
   - component: {fileID: 8001399770501720755}
+  - component: {fileID: 5614385122606924545}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -100,6 +129,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8001399770501720757}
   m_CullTransparentMesh: 0
+--- !u!114 &5614385122606924545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001399770501720757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c45082d0781ecb469f17f969ec2003a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8001399771436666885
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDeck: {fileID: 11400000, guid: 4f744ad4271baf74c983381a40b4135b, type: 2}
+  hand: {fileID: 5614385122606924545}
   deck: {fileID: 4275455237356607577}
   graveyard: {fileID: 6159674981915877938}
 --- !u!1 &8001399771517395281
@@ -400,6 +442,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 058836d6c89a12f4cb7dcd878d0532d3, type: 3}
+--- !u!1 &2729591819167771233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2649563394884676773, guid: 058836d6c89a12f4cb7dcd878d0532d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 82285880591779524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8053661207034876822 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7989399620559852882, guid: 058836d6c89a12f4cb7dcd878d0532d3,
@@ -412,7 +460,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 82285880591779524}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2729591819167771233}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98c335c670acfb04c92f42776a403d11, type: 3}

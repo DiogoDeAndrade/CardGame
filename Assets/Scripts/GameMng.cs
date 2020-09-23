@@ -43,6 +43,13 @@ public class GameMng : MonoBehaviour
         players[index].StartTurn();
     }
 
+    void _NextTurn()
+    {
+        playerIndex = (playerIndex + 1) % players.Count;
+
+        StartTurn(playerIndex);
+    }
+
     static public GameRules GetRules()
     {
         return instance.rules;
@@ -57,5 +64,10 @@ public class GameMng : MonoBehaviour
         cardObject.Set(card);
 
         return cardObject;
+    }
+
+    static public void NextTurn()
+    {
+        instance._NextTurn();
     }
 }

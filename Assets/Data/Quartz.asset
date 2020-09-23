@@ -15,3 +15,4 @@ MonoBehaviour:
   type: 0
   cardName: Quartz
   flavourText: Not only for watches...
+  image: {fileID: 21300000, guid: 296578494c880104abae65719583472b, type: 3}

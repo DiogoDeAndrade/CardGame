@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: GameRules
   m_EditorClassIdentifier: 
   infiniteDeck: 1
+  reshuffleInfinite: 1
+  maxCardsInHand: 6
+  drawPerTurn: 1

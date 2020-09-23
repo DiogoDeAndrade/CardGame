@@ -11,6 +11,7 @@ All code in this repo is made available through [GPLv3].
 * [NaughtyAttributes] by Denis Rizov [MIT]
 * Card Template by Cethiel (https://opengameart.org/content/card-template-0) [CC0]
 * Imp by William.Thompsonj (https://opengameart.org/content/lpc-imp) [CC4]
+* Background from NASA (http://www.nasa.com)
 * Other images from [Wikipedia]
 
 ## Metadata

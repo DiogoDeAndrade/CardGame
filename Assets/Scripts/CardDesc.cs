@@ -10,8 +10,33 @@ public class CardDesc : ScriptableObject
 
     public Type     type;
     public string   cardName = "No name";
+
+    [ShowIf("IsEnergy")]
+    public int      energyAmmount = 0;
+
     [TextArea]
     public string   flavourText;
     [ShowAssetPreview(128, 128)]
     public Sprite   image;
+
+    bool IsEnergy()
+    {
+        return type == Type.Energy;
+    }
+
+    public void OnPlay(Player player)
+    {
+        if ((type == Type.Energy) && (GameMng.GetRules().energyOnDrop))
+        {
+            player.ChangeEnergy(energyAmmount);
+        }
+    }
+
+    public void OnUpkeep(Player player)
+    {
+        if (type == Type.Energy)
+        {
+            player.ChangeEnergy(energyAmmount);
+        }
+    }
 }

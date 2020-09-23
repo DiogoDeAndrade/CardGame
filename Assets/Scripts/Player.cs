@@ -3,20 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     public CardDeck playerDeck;
+    public string   playerName = "Player 1";
+    public int      hp = 20;
+    public int      energy = 0;
+
+    public Color    activeColor;
+    public Color    waitColor;
 
     [Header("References")]
-    public Hand         hand;
-    public CardPile     deck;
-    public CardPile     graveyard;
-    public Transform    overlayContainer;
+    public Hand             hand;
+    public PlayArea         playArea;
+    public CardPile         deck;
+    public CardPile         graveyard;
+    public Transform        overlayContainer;
+    public TextMeshProUGUI  playerNameRef;
+    public TextMeshProUGUI  playerHPRef;
+    public TextMeshProUGUI  playerEnergyRef;
+    public Button           nextTurnButton;
 
     GraphicRaycaster graphicRaycaster;
     CanvasScaler     canvasScaler;
     int              drawCount;
+    bool             activePlayer = false;
 
     Card             currentCard;
 
@@ -48,8 +61,7 @@ public class Player : MonoBehaviour
             // Right button clicked, return the current card to the hand
             if (Input.GetMouseButtonUp(1))
             {
-                hand.Add(currentCard);
-                currentCard = null;
+                DropCardBackToHand();
             }
         }
     }
@@ -62,17 +74,39 @@ public class Player : MonoBehaviour
         ShuffleDeck(shuffledDeck);
 
         deck.Add(shuffledDeck);
+
+        hp = 20;
+        energy = 0;
+
+        UpdateStats();
     }
 
     public void StartTurn()
     {
+        if (activePlayer) return;
+
+        activePlayer = true;
+
         graphicRaycaster.enabled = true;
         drawCount = 0;
+
+        playerNameRef.color = playerHPRef.color = playerEnergyRef.color = activeColor;
+
+        nextTurnButton.interactable = true;
+
+        // Upkeep - Get all cards in play and run them
+        playArea.RunUpkeep();
     }
 
     public void FinishTurn()
     {
+        activePlayer = false;
+
         graphicRaycaster.enabled = false;
+
+        playerNameRef.color = playerHPRef.color = playerEnergyRef.color = waitColor;
+
+        nextTurnButton.interactable = false;
     }
 
     public void DrawCard(CardPile pile)
@@ -137,8 +171,21 @@ public class Player : MonoBehaviour
         currentCard = card;
     }
 
-    private void DropCard(Card card)
+    public void DropCardBackToHand()
     {
+        if (currentCard == null) return;
+
+        hand.Add(currentCard);
+        currentCard = null;
+    }
+
+    public void DropCardInPlayArea()
+    {
+        if (currentCard == null) return;
+
+        playArea.Add(currentCard);
+        hand.Remove(currentCard);
+        currentCard = null;
     }
 
     void ShuffleDeck(List<CardDesc> cards)
@@ -151,5 +198,23 @@ public class Player : MonoBehaviour
             cards[i1] = cards[i2];
             cards[i2] = c;
         }
+    }
+
+    void UpdateStats()
+    {
+        playerNameRef.text = playerName;
+        playerHPRef.text = "HP: " + hp + "/20";
+        playerEnergyRef.text = "Energy: " + energy + "/20";
+    }
+
+    public void ChangeEnergy(int inEnergy)
+    {
+        energy = Math.Min(energy + inEnergy, 20);
+        UpdateStats();
+    }
+
+    public void NextTurn()
+    {
+        GameMng.NextTurn();
     }
 }

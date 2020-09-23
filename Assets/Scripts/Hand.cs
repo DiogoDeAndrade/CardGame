@@ -30,6 +30,13 @@ public class Hand : MonoBehaviour
         card.SetEventHandler(GrabCard);
     }
 
+    public void Remove(Card card)
+    {
+        if (cards == null) return;
+
+        cards.Remove(card);
+    }
+
     private void GrabCard(Card card)
     {
         // Remove grab click handle

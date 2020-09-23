@@ -37,6 +37,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 3.8599854
       objectReference: {fileID: 0}
+    - target: {fileID: 7524200919630602384, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524200919630602384, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524200919630602384, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524200919630602384, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8001399770501720756, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -51,6 +71,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001399770501720756, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8001399771436666884, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
         type: 3}
@@ -207,10 +232,20 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8391170213570683933, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
+        type: 3}
+      propertyPath: playerName
+      value: Player 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8627606634741808991, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 3.8599854
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959174721731330556, guid: 5a00e3ef8e134ce4f8c9811425dbde50,
+        type: 3}
+      propertyPath: m_text
+      value: Player 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a00e3ef8e134ce4f8c9811425dbde50, type: 3}

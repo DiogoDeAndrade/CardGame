@@ -15,3 +15,4 @@ MonoBehaviour:
   type: 0
   cardName: Tesseract
   flavourText: Interdimensional energy!
+  image: {fileID: 21300000, guid: 28ba7be3d7b1ec042a373738c564278f, type: 3}

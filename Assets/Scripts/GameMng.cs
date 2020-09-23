@@ -6,6 +6,7 @@ public class GameMng : MonoBehaviour
 {
     public List<Player>         players;
     public GameRules            rules;
+    public Card                 emptyCardPrefab;
 
     int playerIndex = 0;
 
@@ -45,5 +46,16 @@ public class GameMng : MonoBehaviour
     static public GameRules GetRules()
     {
         return instance.rules;
+    }
+
+    static public Card CreateCard(CardDesc card)
+    {
+        Card cardObject = Instantiate(instance.emptyCardPrefab);
+
+        cardObject.hidden = false;
+        cardObject.name = "Card[" + card.name + "]";
+        cardObject.Set(card);
+
+        return cardObject;
     }
 }

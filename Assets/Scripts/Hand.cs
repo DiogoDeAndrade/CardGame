@@ -12,4 +12,12 @@ public class Hand : MonoBehaviour
 
         return cards.Count;
     }
+
+    public void Add(Card card)
+    {
+        if (cards == null) cards = new List<Card>();
+
+        card.transform.SetParent(transform);
+        cards.Add(card);
+    }
 }

@@ -74,7 +74,13 @@ public class Player : MonoBehaviour
         // Check if we can draw cards (cards in hand is less than maximum allowed)
         if (hand.GetCardCount() >= GameMng.GetRules().maxCardsInHand) return;
 
+        // Get the first card
         CardDesc card = pile.GetFirstCard();
+
+        // Create the card itself and pop it on the hand
+        var cardObject = GameMng.CreateCard(card);
+
+        hand.Add(cardObject);
     }
 
     void ShuffleDeck(List<CardDesc> cards)

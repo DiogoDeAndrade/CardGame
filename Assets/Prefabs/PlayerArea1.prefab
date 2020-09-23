@@ -113,7 +113,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 0
   m_Spacing: 36
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
@@ -238,6 +238,7 @@ MonoBehaviour:
   hand: {fileID: 5614385122606924545}
   deck: {fileID: 4275455237356607577}
   graveyard: {fileID: 6159674981915877938}
+  overlayContainer: {fileID: 0}
 --- !u!223 &1820013642409842005
 Canvas:
   m_ObjectHideFlags: 0
@@ -255,7 +256,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

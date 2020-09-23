@@ -14,4 +14,6 @@ public class GameRules : ScriptableObject
     public int  drawPerTurn = 1;
     public bool energyOnDrop = false;
     public bool attackOnTap = false;
+    public int  maxEnergy = 20;
+    public int  maxHealth = 20;
 }

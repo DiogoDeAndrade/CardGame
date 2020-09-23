@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
 
         deck.Add(shuffledDeck);
 
-        hp = 20;
+        hp = GameMng.GetRules().maxHealth;
         energy = 0;
 
         UpdateStats();
@@ -249,13 +249,13 @@ public class Player : MonoBehaviour
     void UpdateStats()
     {
         playerNameRef.text = playerName;
-        playerHPRef.text = "HP: " + hp + "/20";
-        playerEnergyRef.text = "Energy: " + energy + "/20";
+        playerHPRef.text = "HP: " + hp + "/" + GameMng.GetRules().maxHealth;
+        playerEnergyRef.text = "Energy: " + energy + "/" + GameMng.GetRules().maxEnergy;
     }
 
     public void ChangeEnergy(int inEnergy)
     {
-        energy = Math.Min(energy + inEnergy, 20);
+        energy = Math.Min(energy + inEnergy, GameMng.GetRules().maxEnergy);
         UpdateStats();
     }
 

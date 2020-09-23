@@ -24,6 +24,7 @@ If you want to get your hands dirty on the code, you can extend this in multiple
 * Spells that can attack the enemy player
 * Spells that can affect multiple targets
 * Token system to increase the power of creatures
+* Dragging cards instead of clicking
 * Plenty of more stuff, the limit is your imagination! :)
 
 ## Licences

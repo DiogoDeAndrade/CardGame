@@ -60,6 +60,16 @@ public class GameMng : MonoBehaviour
         return null;
     }
 
+    Player _GetActivePlayer()
+    {
+        foreach (var p in players)
+        {
+            if (p.IsPlayerActive()) return p;
+        }
+
+        return null;
+    }
+
     static public GameRules GetRules()
     {
         return instance.rules;
@@ -84,5 +94,10 @@ public class GameMng : MonoBehaviour
     static public Player GetOtherPlayer(Player player)
     {
         return instance._GetOtherPlayer(player);
+    }
+
+    static public Player GetActivePlayer()
+    {
+        return instance._GetActivePlayer();
     }
 }

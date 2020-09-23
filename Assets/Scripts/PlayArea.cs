@@ -32,6 +32,8 @@ public class PlayArea : MonoBehaviour
 
     private void OnTap(Card card)
     {
+        if (GameMng.GetActivePlayer() != player) return;
+
         if (card.tapped) return;
 
         // Only creatures can be tapped
@@ -68,8 +70,7 @@ public class PlayArea : MonoBehaviour
     {
         foreach (var card in cards)
         {
-            if ((card.desc.type == CardDesc.Type.Creature) &&
-                (card.defense <= 0))
+            if (card.defense <= 0)
             {
                 // Creature is dead, delete it
                 player.SendToGraveyard(card.desc);

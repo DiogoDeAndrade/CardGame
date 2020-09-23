@@ -39,11 +39,14 @@ public class Hand : MonoBehaviour
 
     private void GrabCard(Card card)
     {
-        // Remove grab click handle
-        card.SetEventHandler(null);
-
-        // Pass the responsibility of the card to the player itself
         var player = GetComponentInParent<Player>();
-        player.SetCard(card);
+        if (player.IsPlayerActive())
+        {
+            // Remove grab click handle
+            card.SetEventHandler(null);
+
+            // Pass the responsibility of the card to the player itself
+            player.SetCard(card);
+        }
     }
 }

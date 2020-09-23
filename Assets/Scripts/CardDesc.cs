@@ -6,7 +6,9 @@ using NaughtyAttributes;
 [CreateAssetMenu(menuName = "Card Game/Card")]
 public class CardDesc : ScriptableObject
 {
-    public enum Type { Energy, Creature };
+    public enum Type { Energy, Creature, TargetedSpell };
+    public enum EffectType { Damage, Heal };
+    public enum TargetType { None, EnemyCreature, EnemyCard, PlayerCreature, PlayerCard };
 
     public Type     type;
     public string   cardName = "No name";
@@ -17,8 +19,16 @@ public class CardDesc : ScriptableObject
 
     [ShowIf("IsCreature")]
     public int      attackPower = 0;
-    [ShowIf("IsCreature")]
-    public int      defensePower = 0;
+    public int      defensePower = 1;
+
+    [ShowIf("IsSpell")]
+    public EffectType   effectType = EffectType.Damage;
+    [ShowIf("NeedsTarget")]
+    public TargetType   targetType = TargetType.None;
+    [ShowIf("IsDamageSpell")]
+    public int          damage;
+    [ShowIf("IsHealingSpell")]
+    public int          healAmmount;
 
     [TextArea]
     public string   flavourText;
@@ -33,6 +43,31 @@ public class CardDesc : ScriptableObject
     bool IsCreature()
     {
         return type == Type.Creature;
+    }
+
+    bool IsSpell()
+    {
+        return type == Type.TargetedSpell;
+    }
+
+    bool IsDamageSpell()
+    {
+        return IsSpell() && effectType == EffectType.Damage;
+    }
+
+    bool IsHealingSpell()
+    {
+        return IsSpell() && effectType == EffectType.Heal;
+    }
+
+    bool IsTargetedSpell()
+    {
+        return type == Type.TargetedSpell;
+    }
+
+    public bool NeedsTarget()
+    {
+        return type == Type.TargetedSpell;
     }
 
     public void OnPlay(Player player)
@@ -62,5 +97,38 @@ public class CardDesc : ScriptableObject
         }
 
         return false;
+    }
+
+    public bool IsValidTarget(Player player, Card card)
+    {
+        if (card.GetComponentInParent<Player>() != player)
+        {
+            // Enemy card
+            if ((targetType == TargetType.EnemyCreature) && (card.desc.type == Type.Creature)) return true;
+            if (targetType == TargetType.EnemyCard) return true;
+        }
+        else
+        {
+            // Friend card
+            if ((targetType == TargetType.PlayerCreature) && (card.desc.type == Type.Creature)) return true;
+            if (targetType == TargetType.PlayerCard) return true;
+        }
+
+        return false;
+    }
+
+    public void CastSpell(Player srcPlayer, Card srcCard, Card destCard)
+    {
+        switch (effectType)
+        {
+            case EffectType.Damage:
+                destCard.DealDamage(damage);
+                break;
+            case EffectType.Heal:
+                destCard.Heal(healAmmount);
+                break;
+            default:
+                break;
+        }
     }
 }

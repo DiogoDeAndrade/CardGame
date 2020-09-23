@@ -16,6 +16,11 @@ MonoBehaviour:
   cardName: Energy Sphere
   cost: 0
   energyAmmount: 3
+  attackPower: 0
+  defensePower: 1
+  effectType: 0
+  targetType: 0
+  damage: 0
   flavourText: 'A simple energy sphere
 
 

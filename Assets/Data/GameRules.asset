@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteDeck: 1
   reshuffleInfinite: 1
+  startCardsOnHand: 4
   maxCardsInHand: 6
   drawPerTurn: 1
   energyOnDrop: 1
+  attackOnTap: 1

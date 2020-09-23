@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Card : MonoBehaviour
 {
@@ -94,6 +95,14 @@ public class Card : MonoBehaviour
 
     public void ClickedCard()
     {
+        // Check if we're on a targeting mode
+        Player activePlayer = GameMng.GetActivePlayer();
+        if (activePlayer.IsTargeting())
+        {
+            activePlayer.RunAction(this);
+            return;
+        }
+
         OnClick?.Invoke(this);
     }
 
@@ -131,5 +140,14 @@ public class Card : MonoBehaviour
             UpdateCard();
             return ret;
         }
+    }
+
+    public void Heal(int inHealing)
+    {
+        defense += inHealing;
+
+        if (defense > desc.defensePower) defense = desc.defensePower;
+
+        UpdateCard();
     }
 }

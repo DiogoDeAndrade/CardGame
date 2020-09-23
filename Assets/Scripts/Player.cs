@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
     int              drawCount;
     bool             activePlayer = false;
 
-    Card             currentCard;
+    Card                currentCard;
+    CardDesc.TargetType targetType;
 
     // Start is called before the first frame update
     void Start()
@@ -80,12 +81,17 @@ public class Player : MonoBehaviour
 
         UpdateStats();
 
+        // Set me as active player, so I can draw cards
+        activePlayer = true;
+
         for (int i = 0; i < GameMng.GetRules().startCardsOnHand; i++)
         {
             DrawCard(deck);
             // So we don't exceed the draw limit
             drawCount = 0;
         }
+
+        activePlayer = false;
     }
 
     public void StartTurn()
@@ -94,7 +100,7 @@ public class Player : MonoBehaviour
 
         activePlayer = true;
 
-        graphicRaycaster.enabled = true;
+        //graphicRaycaster.enabled = true;
         drawCount = 0;
 
         playerNameRef.color = playerHPRef.color = playerEnergyRef.color = activeColor;
@@ -122,7 +128,7 @@ public class Player : MonoBehaviour
 
         activePlayer = false;
 
-        graphicRaycaster.enabled = false;
+        //graphicRaycaster.enabled = false;
 
         playerNameRef.color = playerHPRef.color = playerEnergyRef.color = waitColor;
 
@@ -131,6 +137,9 @@ public class Player : MonoBehaviour
 
     public void DrawCard(CardPile pile)
     {
+        // Can't draw cards if we're not the active player
+        if (!activePlayer) return;
+
         // Can't draw a card if we have one floating
         if (currentCard != null) return;
 
@@ -189,10 +198,20 @@ public class Player : MonoBehaviour
 
         // Card movement
         currentCard = card;
+
+        // If this card is targeted spell, we need to enable "casting" on a target
+        targetType = CardDesc.TargetType.None;
+        if (card.desc.NeedsTarget())
+        {
+            targetType = card.desc.targetType;
+        }
     }
 
     public void DropCardBackToHand()
     {
+        // Can't reset the card to this hand if we're not the active player
+        if (!activePlayer) return;
+
         if (currentCard == null) return;
 
         hand.Add(currentCard);
@@ -201,6 +220,9 @@ public class Player : MonoBehaviour
 
     public void DropCardInPlayArea()
     {
+        // Can't drop a card in the other player's area
+        if (!activePlayer) return;
+
         if (currentCard == null) return;
 
         // Check if we can drop this card (if we can pay the cost or other weirder criteria)
@@ -285,5 +307,38 @@ public class Player : MonoBehaviour
     public void SendToGraveyard(CardDesc card)
     {
         graveyard.Add(card);
+    }
+
+    public bool IsPlayerActive()
+    {
+        return activePlayer;
+    }
+
+    public bool IsTargeting()
+    {
+        return targetType != CardDesc.TargetType.None;
+    }
+
+    public void RunAction(Card card)
+    {
+        if (currentCard == null) return;
+
+        if (currentCard.desc.IsValidTarget(this, card))
+        {
+            // This is a valid target
+            currentCard.desc.CastSpell(this, currentCard, card);
+
+            // Destroy this card
+            hand.Remove(currentCard);
+            graveyard.Add(currentCard.desc);
+            Destroy(currentCard.gameObject);
+
+            // Clear the playfield
+            playArea.ClearCreatures();
+            GameMng.GetOtherPlayer(this).playArea.ClearCreatures();
+
+            // Disable target mode
+            targetType = CardDesc.TargetType.None;
+        }
     }
 }

@@ -16,6 +16,11 @@ MonoBehaviour:
   cardName: Quartz
   cost: 0
   energyAmmount: 1
+  attackPower: 0
+  defensePower: 1
+  effectType: 0
+  targetType: 0
+  damage: 0
   flavourText: 'Not only for watches...
 
 
